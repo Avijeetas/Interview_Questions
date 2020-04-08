@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> bin_search(vector<int>& v, int l,int r, int tar)
+    {
+        if(l>r)
+            return {-1,-1};
+        int md=(l+r)/2;
+        if(v[md]==tar)
+        {
+            l=r=md;
+            while(r<v.size()-1 and v[r+1]==tar )
+                r++;
+            while(l>0 and v[l-1]==tar)
+                l--;
+            return {l,r};
+                
+        }else if(v[md]<tar)
+            return bin_search(v,md+1,r,tar);
+        else return bin_search(v,l,md-1,tar);
+    }
+    vector<int> searchRange(vector<int>& v, int tar) {
+        return bin_search(v,0,v.size()-1,tar);
+    }
+};
