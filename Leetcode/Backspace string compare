@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool backspaceCompare(string S, string T) {
+    
+        stack<char> s,t;
+        for(char c : S)
+        {
+            if(c!='#')
+                s.push(c);
+            else if(!s.empty())
+                s.pop();
+        }
+                for(char c : T)
+        {
+            if(c!='#')
+                t.push(c);
+            else if(!t.empty())
+                t.pop();
+        }
+        
+        while(!s.empty())
+        {
+            char x=s.top();
+            if(t.empty() || t.top()!=x)
+                return 0;
+            s.pop();
+            t.pop();
+        }
+        return s.empty() && t.empty();
+    }
+};
