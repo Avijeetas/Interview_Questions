@@ -1,0 +1,54 @@
+class Solution {
+    public:
+        ListNode* mergeKLists(vector<ListNode*>& lists) {
+            return merge_lists(lists, 0, lists.size()-1);
+        }
+
+    protected:
+        ListNode* merge_lists(vector<ListNode*>& lists, int start, int end)
+        {
+            if(start > end) return nullptr;
+            if(start == end) return lists[start];
+
+            int mid = (start+end)/2;
+            ListNode* x1 = merge_lists(lists, start, mid);
+            ListNode* x2 = merge_lists(lists, mid+1, end);
+
+        
+        ListNode* x=new ListNode();
+        ListNode* ans = x;
+        int f=0;
+        while(x1!=NULL and x2!=NULL)
+        {
+            
+            if(x1->val < x2->val)
+            {
+                ans->next=x1;
+                x1=x1->next;
+
+            }
+            else
+            {
+                ans->next=x2;
+                x2=x2->next;
+
+            }
+            ans=ans->next;
+
+        }
+        
+        if(x1!=NULL)
+        {
+            ans->next=x1;
+            
+        }
+               
+        if(x2!=NULL)
+        {
+            ans->next=x2;
+            
+        }
+        return x->next;
+
+        }
+};
