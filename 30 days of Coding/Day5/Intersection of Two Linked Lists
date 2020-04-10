@@ -28,3 +28,54 @@ public:
         return ans;
     }
 };
+
+
+// More Efficient
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int node(ListNode *x)
+    {
+        int c=0;
+        while(x)
+            c++,x=x->next;
+        return c;
+    }
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+  int cA = 0, cB = 0;
+        
+        cA=node(headA);
+        cB=node(headB);
+            
+        ListNode * tempA = headA;
+        ListNode * tempB = headB;
+        
+        
+        while(cA > cB && tempA) {
+            tempA = tempA->next;
+            cA--;
+        }
+        
+        while(cB > cA && tempB) {
+            tempB = tempB->next;
+            cB--;
+        }
+        
+        while(tempA && tempB) {
+            if (tempA == tempB) {
+                return tempA;
+            } else {
+                tempA = tempA->next;
+                tempB = tempB->next;
+            }
+        }
+        return tempA;
+          }
+};
