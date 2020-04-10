@@ -1,0 +1,24 @@
+class Solution {
+public:
+
+  int numFriendRequests(vector<int>& ages) {
+    int m[121]={};
+    
+    for(int c: ages)
+      m[c]++;
+    
+    int pre[121];
+    pre[0] = m[0];
+    for(int i = 1; i <= 120; i++)
+      pre[i] = pre[i - 1] + m[i];
+
+    int ans = 0;
+
+    for(int A = 15; A <= 120; A++) {
+      int B = A / 2 + 8;
+      ans += (pre[A] - pre[B - 1] - 1) * m[A];
+    }
+    
+    return ans;
+  }
+};
